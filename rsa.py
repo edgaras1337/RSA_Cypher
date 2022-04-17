@@ -42,30 +42,6 @@ def gcd(p, q):
     return p
 
 
-def egcd(a, b):
-    # Base Case
-    if a == 0:
-        return b, 0, 1
-
-    _gcd, x1, y1 = egcd(b % a, a)
-
-    # Update x and y using results of recursive
-    # call
-    x = y1 - (b // a) * x1
-    y = x1
-
-    return _gcd, x, y
-
-
-def modular_inv(a, b):
-    _gcd, x, y = egcd(a, b)
-
-    if x < 0:
-        x += b
-
-    return x
-
-
 def prime_factors(n):
     org = n
     primes = []
@@ -104,8 +80,7 @@ def generate_public_key(p, q):
     while e < phi_n:
         if is_co_prime(e, phi_n):
             break
-        else:
-            e += 1
+        e += 1
 
     return e, n
 
@@ -115,7 +90,8 @@ def generate_private_key(e, n):
 
     phi_n = (p - 1) * (q - 1)
 
-    d = modular_inv(e, phi_n)
+    # modular inverse, using EGCD (built into pow)
+    d = pow(e, -1, phi_n)
 
     return d, n
 
