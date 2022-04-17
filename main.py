@@ -14,8 +14,12 @@ def menu():
         while not is_prime(p):
             print("\nNot a prime number!")
             p = to_int(input("\nPlease enter a PRIME number: "))
+
         q = input("\nPlease enter another PRIME number: ")
         q = to_int(q)
+        while p == q:
+            print("Numbers must differ!")
+            q = to_int(input("\nPlease enter a PRIME number: "))
         while not is_prime(q):
             print("\nNot a prime number!")
             q = to_int(input("\nPlease enter a PRIME number: "))
