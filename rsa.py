@@ -31,15 +31,15 @@ def is_prime(n):
         return False
 
 
-def is_co_prime(p, q):
-    return gcd(p, q) == 1
-
-
 def gcd(p, q):
     while q:
         p, q = q, p % q
 
     return p
+
+
+def is_co_prime(p, q):
+    return gcd(p, q) == 1
 
 
 def prime_factors(n):
